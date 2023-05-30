@@ -12,7 +12,6 @@ router.get("/", async (req, res) => {
     const keyTransformed=key[0].toUpperCase()+key.slice(1)
     const productsData = await product.find({[keyTransformed]:value });
     res.json({ data: productsData });
-    
   });
 
 

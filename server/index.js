@@ -5,8 +5,11 @@ import mongoose from "mongoose"
 import productapi from "./routers/product.js"
 import Brand from "./routers/brand.js"
 import categoryapi from "./routers/categories.js"
-const app=express();
+import dotenv from 'dotenv'
+import auth from './routers/auth.js'
 
+const app=express();
+dotenv.config()
 //middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -26,16 +29,18 @@ res.send("hello world");
 app.use("/product",productapi);
 app.use("/brand",Brand);
 app.use("/category",categoryapi);
+app.use("/auth",auth);
 
 
 
 
 
-mongoose.connect("mongodb+srv://umangsahu:Umang123@umang.zswrbve.mongodb.net/ecommerce?retryWrites=true&w=majority",{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
+mongoose.connect(`${process.env.Mongo}`,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
 console.log("mongo db connection is succesfull");}).catch((err)=>{
     console.log(err)
 }
 )
 app.listen(PORT,()=>{
     console.log("server is running on"+PORT);
+   
 })
