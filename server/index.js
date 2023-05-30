@@ -7,6 +7,8 @@ import Brand from "./routers/brand.js"
 import categoryapi from "./routers/categories.js"
 import dotenv from 'dotenv'
 import auth from './routers/auth.js'
+import passport from 'passport';
+import passportConfig from "./config/passport.js"
 
 const app=express();
 dotenv.config()
@@ -14,6 +16,9 @@ dotenv.config()
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('public'))
+app.use(passport.initialize());
+passportConfig(passport)
+
 
 const PORT=process.env.PORT||27713;
 

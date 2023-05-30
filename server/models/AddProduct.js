@@ -9,8 +9,9 @@ const product= new Schema({
     Brand:mongoose.Types.ObjectId,
     Description:{type:String},
     Category:mongoose.Types.ObjectId,
-    // user:mongoose.Types.ObjectId,
+    User:mongoose.Types.ObjectId,
     createdAt:{type:Date, default:Date.now},
+    
 
 })
-export default new mongoose.model("addproducts",product);
+export default new mongoose.model("ProductsList",product);

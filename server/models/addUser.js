@@ -6,8 +6,8 @@ const userSchema = new Schema({
     lastName: { type: String },
     email: { type: String },
     password: { type: String },
-    // isAdmin:{type:Boolean}
+    isAdmin:{type:Boolean,default:false}
   });
 
 
-  export default new mongoose.model("Users",userSchema);
+  export default new mongoose.model("Userdata",userSchema);

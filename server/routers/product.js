@@ -1,8 +1,8 @@
 import { Router } from "express";
 import  uploadMiddleware from "../middleware/multerMiddleware.js"
 import product from "../models/AddProduct.js"
-
-
+import passport from "passport";
+import userSchema from '../models/addUser.js'
 
 const router=Router();
 
@@ -15,7 +15,8 @@ router.get("/", async (req, res) => {
   });
 
 
-router.post("/",uploadMiddleware.single("productImage"),async(req,res)=>{
+router.post("/",passport.authenticate('jwt',{session:false}),uploadMiddleware.single("productImage"),async(req,res)=>{
+
 if( req.file){
 
 const products=new product({
@@ -26,10 +27,14 @@ const products=new product({
     Brand:req.body.brand,
     Description:req.body.description,
     Category:req.body.category,
-    
+    User:req.user._id
 })
 
 const data=await products.save();
+
+if(!req.user.isAdmin){
+await userSchema.findOneAndUpdate({ _id:req.user._id}, { isAdmin:true }, { new: true })
+}
 
 res.send("products add succesfully")
 }else{
