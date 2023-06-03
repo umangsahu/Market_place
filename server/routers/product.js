@@ -8,10 +8,12 @@ const router=Router();
 
 
 router.get("/", async (req, res) => {
-    const { key, value } = req.query; // Assuming the key and value are passed as query parameters
-    const keyTransformed=key[0].toUpperCase()+key.slice(1)
-    const productsData = await product.find({[keyTransformed]:value });
+    // const { key, value } = req.query; // Assuming the key and value are passed as query parameters
+    // const keyTransformed=key[0].toUpperCase()+key.slice(1)
+    
+    const productsData = await product.find().sort({ createdAt: -1 });
     res.json({ data: productsData });
+    console.log(productsData);
   });
 
 
