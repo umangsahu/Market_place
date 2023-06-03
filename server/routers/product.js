@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     
     const productsData = await product.find().sort({ createdAt: -1 });
     res.json({ data: productsData });
-    console.log(productsData);
+    
   });
 
 
