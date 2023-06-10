@@ -19,8 +19,8 @@ router.get("/", async (req, res) => {
 
 router.post("/",passport.authenticate('jwt',{session:false}),uploadMiddleware.single("productImage"),async(req,res)=>{
 
-if( req.file){
-
+if(req.file){
+console.log("hello world");
 const products=new product({
     ProductImg:req.file.filename,
     Title:req.body.title,
@@ -34,6 +34,7 @@ const products=new product({
 
 const data=await products.save();
 
+//initially admin is false but someone add product its means now its admin
 if(!req.user.isAdmin){
 await userSchema.findOneAndUpdate({ _id:req.user._id}, { isAdmin:true }, { new: true })
 }
