@@ -26,13 +26,6 @@ const PORT=process.env.PORT||27713;
 
 
 
-
-
-
-app.get("/",(req,res)=>{
-res.send("hello world");
-})
-
 app.use("/product",productapi);
 app.use("/brand",Brand);
 app.use("/category",categoryapi);
